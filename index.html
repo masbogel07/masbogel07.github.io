@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="You're invited to Muna's Bridal Shower">
+<meta property="og:description" content="Tap to open your invitation.">
+</head>
+<body>
+<title>Muna's Bridal Shower</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Great+Vibes&family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<style>
+/* Layout: a single calm column under a blue-and-white café awning. Header, a three-up details row, theme, guest notes, RSVP, actions. Single-theme by choice (a printed invitation). */
+:root {
+  --paper: #fff6ee;
+  --paper-2: #fdeae4;
+  --rose: #e8506f;
+  --blue: #5b9bd5;
+  --blue-deep: #3f7fbd;
+  --green: #4f9a55;
+  --ink: #1f3a33;
+  --navy: #2a3470;
+  --gold: #c8933e;
+  --display: "Great Vibes", "Brush Script MT", cursive;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --text: "Lora", Georgia, serif;
+  --soft: #4c566e;
+  --env: #a9cbef;
+  --env-deep: #7fabdf;
+  --env-in: #6e9fd6;
+  --wash:
+    radial-gradient(50rem 36rem at 0% 0%, #d9e9f8 0%, transparent 60%),
+    radial-gradient(44rem 36rem at 100% 40%, #fbdde3 0%, transparent 60%),
+    radial-gradient(44rem 36rem at 0% 100%, #e6f1da 0%, transparent 60%),
+    #fff6ee;
+  --hand: "Dancing Script", "Brush Script MT", cursive;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--wash);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.4;
+  font-variant-numeric: lining-nums;
+  padding-block: 24px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 30; }
+
+.card {
+  position: relative; max-width: 540px; margin: 0 auto;
+  background: linear-gradient(180deg, #fffaf4 0%, var(--paper) 55%, var(--paper-2) 100%);
+  border-radius: 6px 6px 26px 26px;
+  box-shadow: 0 30px 60px -24px rgba(70,60,110,.35), 0 0 0 1px rgba(200,147,62,.25);
+  overflow: hidden; text-align: center;
+  padding: 78px 26px 104px;
+  animation: cardIn 1s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes cardIn { from { opacity: 0; transform: translateY(24px) scale(.97); } to { opacity: 1; transform: none; } }
+
+.awning {
+  position: absolute; top: 0; left: 0; right: 0; height: 52px; z-index: 3;
+  background: repeating-linear-gradient(90deg, #8fbbe6 0 44px, #fffaf4 44px 88px);
+  transform-origin: top; animation: drop 1.1s .1s cubic-bezier(.2,.9,.3,1.2) both;
+}
+.awning::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -17px; height: 18px;
+  background:
+    radial-gradient(circle at 22px 0, #8fbbe6 21px, transparent 22px) 0 0 / 88px 18px repeat-x,
+    radial-gradient(circle at 66px 0, #fffaf4 21px, transparent 22px) 0 0 / 88px 18px repeat-x;
+  filter: drop-shadow(0 3px 2px rgba(60,80,120,.18));
+}
+@keyframes drop { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+.bloom { position: absolute; width: 170px; height: auto; aspect-ratio: 1; z-index: 1; pointer-events: none; transform-origin: 50% 50%; }
+.bloom.tl { top: 26px; left: -52px; animation: sway 7s ease-in-out infinite; }
+.bloom.tr { top: 26px; right: -52px; animation: sway 8s -3s ease-in-out infinite; }
+.bloom.br { bottom: -40px; right: -44px; animation: sway 8s -2s ease-in-out infinite reverse; }
+.bloom.bl { bottom: -40px; left: -44px; width: 140px; animation: sway 9s -5s ease-in-out infinite; }
+@keyframes sway { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(4deg); } }
+
+.inner { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 30px; }
+.rise { animation: rise .9s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(var(--i, 0) * .16s + .5s); }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* tower */
+.tower { display: block; width: 52px; height: auto; margin: 0 auto 12px; fill: none; stroke: var(--gold); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.tower path { stroke-dasharray: 1; animation: draw 2.2s .5s ease-out both; }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+/* envelope opening */
+#envelope { display: none; position: fixed; inset: 0; z-index: 20; width: 100%; border: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 26px; background: var(--wash); color: var(--ink); font-family: var(--serif); padding-block: 24px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); transition: opacity .6s ease; }
+html.sealed #envelope { display: flex; }
+html.sealed, html.sealed body { overflow: hidden; height: 100%; }
+html.paused .card, html.paused .awning, html.paused .rise, html.paused .tower path { animation-play-state: paused; }
+#envelope:focus-visible { outline: 3px solid var(--blue); outline-offset: -6px; }
+.env-head { display: block; letter-spacing: .3em; font-weight: 700; font-size: 15px; }
+.env { position: relative; display: block; width: min(82vw, 360px); aspect-ratio: 7 / 5; animation: bob 3.2s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+.env-back { position: absolute; inset: 0; background: var(--env-in); border-radius: 10px; box-shadow: 0 26px 40px -18px rgba(50,70,130,.55); }
+.env-letter { position: absolute; left: 6%; right: 6%; top: 7%; bottom: 5%; z-index: 2; display: grid; place-items: center; align-content: start; padding-top: 7%; background: #fffaf4; border-radius: 6px; color: var(--rose); font-family: var(--display); font-size: clamp(38px, 12vw, 52px); line-height: 1; transition: transform .8s cubic-bezier(.3,.8,.3,1); }
+.env-pocket { position: absolute; inset: 0; z-index: 3; background: var(--env); border-radius: 10px; clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%); }
+.env-pocket::after { content: ""; position: absolute; inset: 0; background: #bcd7f3; clip-path: polygon(0 100%, 50% 50%, 100% 100%); }
+.env-flapbox { position: absolute; inset: 0; z-index: 4; perspective: 900px; filter: drop-shadow(0 4px 4px rgba(40,60,120,.28)); }
+.env-flap { position: absolute; top: 0; left: 0; right: 0; height: 60%; background: linear-gradient(180deg, #93bbe8, var(--env-deep)); clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .7s ease-in-out; }
+.env-seal { position: absolute; left: 50%; top: 60%; z-index: 5; width: 66px; height: 66px; margin: -33px 0 0 -33px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, #f47f95, #cf3557); box-shadow: 0 0 0 3px #f9c9d3, 0 6px 12px rgba(120,20,50,.4); color: #fff; font-size: 28px; transition: transform .3s ease, opacity .3s ease; }
+.env-seal i { font-style: normal; animation: beat 1.4s ease-in-out infinite; }
+.env-tap { display: block; letter-spacing: .24em; font-size: 15px; font-weight: 700; color: var(--navy); animation: fade 1.8s ease-in-out infinite; }
+@keyframes fade { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+#envelope.open .env { animation: none; }
+#envelope.open .env-seal { transform: scale(0); opacity: 0; }
+#envelope.open .env-flap { transform: rotateX(178deg); }
+#envelope.open .env-tap { visibility: hidden; }
+#envelope.lift .env-flapbox { z-index: 1; }
+#envelope.lift .env-letter { transform: translateY(-58%); }
+#envelope.gone { opacity: 0; pointer-events: none; }
+
+/* header */
+.eyebrow { letter-spacing: .3em; font-weight: 700; font-size: 15px; margin: 0; }
+h1 { margin: 8px 0 0; font-family: var(--display); font-weight: 400; color: var(--rose); font-size: clamp(76px, 23vw, 118px); line-height: 1.15; }
+h1 .heart { display: inline-block; font-size: .28em; vertical-align: top; animation: beat 1.4s ease-in-out infinite; }
+@keyframes beat { 0%,60%,100% { transform: scale(1); } 15% { transform: scale(1.35); } 30% { transform: scale(1); } 45% { transform: scale(1.2); } }
+h2 { margin: -6px 0 10px; font-size: clamp(28px, 8vw, 38px); letter-spacing: .14em; font-weight: 700; color: #17382f; }
+.tag { font-style: italic; font-weight: 600; color: var(--navy); font-size: 22px; margin: 0 auto; max-width: 26ch; text-wrap: balance; }
+
+/* details */
+.details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.tile { background: #fffaf4; border: 1px solid #efd3bd; border-radius: 18px; padding: 16px 8px 14px; min-width: 0; box-shadow: 0 10px 20px -16px rgba(60,40,20,.55); transition: transform .25s; }
+.tile:hover { transform: translateY(-4px); }
+.tile svg { width: 32px; height: 32px; stroke: var(--blue-deep); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tile h3 { margin: 6px 0 4px; font-size: 14px; letter-spacing: .22em; }
+.tile p { margin: 0; font-style: italic; font-weight: 600; color: var(--navy); font-size: 17px; line-height: 1.2; }
+.tile p.big { font-size: 28px; font-style: normal; line-height: 1.1; }
+.tile small { display: block; font-size: 14px; font-weight: 500; margin-top: 2px; }
+.hand { transform-origin: 12px 12px; animation: spin 10s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.pin { animation: hop 2.2s ease-in-out infinite; }
+@keyframes hop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+/* theme */
+.theme .label { letter-spacing: .3em; font-weight: 700; font-size: 15px; margin: 0; display: flex; align-items: center; gap: 12px; justify-content: center; }
+.theme .label::before, .theme .label::after { content: ""; width: 44px; height: 1px; background: var(--ink); opacity: .45; }
+.spring { font-family: var(--display); font-size: clamp(50px, 15vw, 70px); color: var(--green); margin: 6px 0 4px; line-height: 1.1; }
+.note { font-style: italic; font-weight: 600; color: var(--navy); margin: 0 auto; max-width: 34ch; text-wrap: balance; }
+.white { display: flex; align-items: center; gap: 14px; justify-content: center; margin: 16px auto 0; background: #e9eefa; border: 1px solid #c9d2ea; border-radius: 20px; padding: 12px 18px; text-align: left; color: var(--navy); font-weight: 700; letter-spacing: .03em; line-height: 1.25; }
+.white svg { width: 34px; height: 42px; flex: none; fill: none; stroke: var(--navy); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; animation: hop 3.5s ease-in-out infinite; }
+.white span { display: block; font-style: italic; font-weight: 600; font-size: 21px; }
+
+/* guests */
+.guests h3 { letter-spacing: .2em; font-size: 16px; margin: 0 0 10px; display: flex; align-items: center; gap: 10px; justify-content: center; }
+.guests h3::before, .guests h3::after { content: ""; flex: 1; max-width: 36px; height: 1px; background: var(--ink); opacity: .45; }
+.guests p { margin: 0 auto; color: var(--navy); font-weight: 600; max-width: 40ch; }
+.guests .hosts { font-style: italic; font-weight: 700; font-size: 25px; margin: 0 auto 10px; }
+.gift { margin-top: 16px; padding-top: 16px; border-top: 1px dashed #e0b9a6; }
+.gift p { font-size: 18px; }
+
+.surprise {
+  font: inherit; border: 0; cursor: pointer; width: 100%; max-width: 360px; margin: 0 auto;
+  background: #fbd4dc; border-radius: 34px; padding: 14px 20px; color: var(--rose);
+  font-family: var(--hand); font-size: 26px; line-height: 1.15; box-shadow: 0 10px 20px -12px rgba(232,80,111,.8);
+  transition: transform .2s; animation: wiggle 5s 3s ease-in-out infinite;
+}
+.surprise:hover { transform: scale(1.04); }
+.surprise small { display: block; font-family: var(--serif); font-size: 12px; letter-spacing: .2em; color: #b04a60; font-weight: 700; margin-top: 2px; }
+@keyframes wiggle { 0%,90%,100% { transform: rotate(0); } 93% { transform: rotate(-2deg); } 96% { transform: rotate(2deg); } }
+
+/* rsvp */
+html { scroll-behavior: smooth; }
+.jump-row { display: flex; justify-content: center; }
+#rsvp { scroll-margin-top: 16px; background: #fffaf4; border: 1px solid #efd3bd; border-radius: 22px; padding: 22px 18px; box-shadow: 0 14px 26px -20px rgba(60,40,20,.6); }
+#rsvp h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 52px; line-height: 1.1; color: var(--rose); }
+.by { margin: 2px 0 18px; font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--blue-deep); }
+#rsvp-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.field { display: flex; flex-direction: column; gap: 6px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.field > label, .field > legend { padding: 0; font-weight: 700; font-size: 17px; color: var(--navy); }
+.field input[type="text"], .field select, .field textarea { width: 100%; font-family: var(--text); font-size: 16px; color: var(--ink); background: #fff; border: 1.5px solid #e3c9b5; border-radius: 12px; padding: 12px 14px; }
+.field textarea { min-height: 84px; resize: vertical; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 1px; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+.choice { position: relative; display: block; cursor: pointer; }
+.choice input { position: absolute; opacity: 0; inset: 0; margin: 0; }
+.choice span { display: flex; align-items: center; justify-content: center; min-height: 58px; height: 100%; padding: 10px 8px; text-align: center; line-height: 1.15; border: 1.5px solid #e3c9b5; border-radius: 14px; background: #fff; font-weight: 700; font-size: 17px; color: var(--navy); transition: background .2s, border-color .2s, color .2s, transform .2s; }
+.choice input:checked + span { background: var(--rose); border-color: var(--rose); color: #fff; transform: scale(1.03); }
+.choice input:focus-visible + span { outline: 3px solid var(--blue); outline-offset: 2px; }
+#rsvp-send { width: 100%; border: 0; cursor: pointer; }
+#rsvp-send:disabled { opacity: .6; cursor: default; }
+#rsvp-error { margin: 0; font-family: var(--text); font-size: 15px; color: #a0334f; text-align: center; }
+#rsvp-error a { color: inherit; }
+#rsvp-done { padding-block: 6px; animation: rise .7s ease both; }
+#rsvp-done b { display: block; font-family: var(--hand); font-weight: 600; font-size: 30px; line-height: 1.15; color: var(--rose); }
+#rsvp-done p { margin: 8px 0 0; font-family: var(--text); font-size: 16px; color: var(--soft); }
+
+/* actions */
+.actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.btn { font-family: var(--serif); font-weight: 700; font-size: 17px; letter-spacing: .06em; text-decoration: none; padding: 12px 22px; border-radius: 999px; background: var(--blue-deep); color: #fff; transition: transform .2s; box-shadow: 0 10px 18px -12px rgba(40,90,150,.9); }
+.btn.alt { background: #fffaf4; color: var(--navy); border: 1.5px solid var(--blue); box-shadow: none; }
+.btn:hover { transform: translateY(-2px); }
+.surprise:focus-visible, .btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.thanks { font-family: var(--hand); color: var(--rose); font-size: 28px; line-height: 1.15; margin: 0; text-wrap: balance; }
+
+/* Type hierarchy: key facts are bold or script and colored; supporting copy is lighter and quieter. */
+.note, .guests p, .gift p { font-family: var(--text); font-weight: 400; font-style: normal; color: var(--soft); font-size: 17px; line-height: 1.55; }
+.guests p.hosts { font-family: var(--display); font-weight: 400; font-style: normal; font-size: 44px; line-height: 1.1; color: var(--rose); margin-bottom: 12px; }
+.tile p { font-style: normal; font-weight: 700; color: var(--ink); }
+.tile p.big { color: var(--rose); }
+.tile small { font-family: var(--text); font-style: normal; font-weight: 400; color: var(--soft); font-size: 14px; line-height: 1.35; }
+.white { background: #fde3e8; border-color: #f2b4c2; color: #a0334f; font-size: 15px; letter-spacing: .12em; }
+.white svg { stroke: var(--rose); }
+.white span { text-wrap: balance; font-family: var(--hand); font-style: normal; font-weight: 600; letter-spacing: 0; font-size: 28px; line-height: 1.15; color: var(--rose); }
+.guests h3, .theme .label { color: var(--blue-deep); }
+@media (max-width: 560px) {
+  body { font-size: 19px; padding-block: 14px 32px; }
+  .card { padding: 80px 18px 96px; border-radius: 4px 4px 22px 22px; }
+  .inner { gap: 26px; }
+  .tag { font-size: 21px; }
+  .details { grid-template-columns: 1fr; gap: 10px; }
+  .tile { display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; align-items: center; text-align: left; padding: 14px 18px; }
+  .tile:hover { transform: none; }
+  .tile svg { grid-row: 1 / span 4; width: 40px; height: 40px; }
+  .tile h3 { margin: 0; font-size: 13px; letter-spacing: .24em; }
+  .tile p { font-size: 20px; } .tile p.big { font-size: 30px; }
+  .tile small { font-size: 15px; }
+  .tile p br { display: none; }
+  .tile p small br { display: inline; }
+  .white { padding: 14px; } .white span { font-size: 25px; }
+  .guests p.hosts { font-size: clamp(28px, 8.6vw, 40px); }
+  .tile h3 { font-size: 14px; }
+  .guests h3 { font-size: 15px; text-wrap: balance; }
+  .guests h3::before, .guests h3::after { display: none; }
+  .surprise small { font-size: 13px; }
+  .note, .guests p, .gift p { font-size: 17px; }
+  .surprise { font-size: 28px; padding: 18px 20px; }
+  .actions { flex-direction: column; } .btn { text-align: center; padding: 16px 22px; font-size: 19px; }
+  .bloom { width: 132px; }
+  .bloom.tl { top: 30px; left: -48px; } .bloom.tr { top: 30px; right: -48px; }
+  .bloom.br { right: -36px; bottom: -34px; } .bloom.bl { left: -36px; bottom: -34px; width: 110px; }
+}
+@media (max-width: 560px) { .tile p { text-wrap: balance; } }
+@media (max-width: 375px) {
+  h2 { font-size: 26px; letter-spacing: .07em; }
+  .surprise { font-size: 24px; padding-inline: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; }
+  #fx { display: none; }
+}
+</style>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<script>
+if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) document.documentElement.classList.add('sealed', 'paused');
+</script>
+
+<button id="envelope" type="button" aria-label="Open your invitation">
+  <span class="env-head">YOU’RE INVITED</span>
+  <span class="env">
+    <span class="env-back"></span>
+    <span class="env-letter">Muna’s</span>
+    <span class="env-pocket"></span>
+    <span class="env-flapbox"><span class="env-flap" style="display:block"></span></span>
+    <span class="env-seal"><i>♥</i></span>
+  </span>
+  <span class="env-tap">TAP TO OPEN</span>
+</button>
+
+<main class="card">
+  <div class="awning"></div>
+  <canvas class="bloom tl" data-kind="blue" data-seed="11" width="480" height="480" aria-hidden="true"></canvas>
+  <canvas class="bloom tr" data-kind="rose" data-seed="27" width="480" height="480" aria-hidden="true"></canvas>
+  <canvas class="bloom bl" data-kind="rose" data-seed="43" width="480" height="480" aria-hidden="true"></canvas>
+  <canvas class="bloom br" data-kind="blue" data-seed="58" width="480" height="480" aria-hidden="true"></canvas>
+
+  <div class="inner">
+    <header class="rise" style="--i:0">
+      <svg class="tower" viewBox="0 0 60 110" aria-hidden="true">
+        <path pathLength="1" d="M30 2V14M27 14h6l1 6h-8zM26 20Q25 40 21 54H39Q35 40 34 20M18 54h24M21 56Q19 68 14 76H46Q41 68 39 56M11 76h38M14 78Q11 94 4 108H18Q22 92 30 90Q38 92 42 108H56Q49 94 46 78"/>
+        <path pathLength="1" d="M27 26l6 6M33 26l-6 6M26.500 33l7 7M33.500 33l-7 7M25 42l10 10M35 42l-10 10M22 58l16 16M38 58l-16 16M14 82l8 8M46 82l-8 8M11 92l8 8M49 92l-8 8"/>
+      </svg>
+      <p class="eyebrow">YOU’RE INVITED TO</p>
+      <h1>Muna’s <span class="heart">♥</span></h1>
+      <h2>BRIDAL SHOWER</h2>
+      <p class="tag">A new chapter, a beautiful journey, and a future full of love!</p>
+    </header>
+
+    <section class="details rise" style="--i:2" aria-label="Event details">
+      <div class="tile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+        <h3>DATE</h3>
+        <p>Thursday, <br>Nov 26, 2026</p>
+      </div>
+      <div class="tile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 12l3.500 2"/><path class="hand" d="M12 12V6.500"/></svg>
+        <h3>TIME</h3>
+        <p class="big">2:00 PM</p>
+        <small>Please arrive on time</small>
+      </div>
+      <div class="tile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><g class="pin"><path d="M12 21s-7-6.200-7-11.200A7 7 0 0 1 19 9.800C19 14.800 12 21 12 21z"/><circle cx="12" cy="9.800" r="2.600"/></g></svg>
+        <h3>PLACE</h3>
+        <p>Sweet Paris Crêperie &amp; Café<small>265 Radio Dr., Suite K<br>Woodbury, MN 55125</small></p>
+      </div>
+    </section>
+
+    <div class="jump-row rise" style="--i:2"><a class="btn" href="#rsvp">RSVP by November 19</a></div>
+
+    <section class="theme rise" style="--i:3">
+      <p class="label">THEME</p>
+      <p class="spring">Spring Garden</p>
+      <p class="note">Feel free to dress in light, fresh, and spring-inspired looks that fit the garden theme!</p>
+      <div class="white">
+        <svg viewBox="0 0 40 48" aria-hidden="true"><path d="M14 3l1 8-3 6 3 4-9 24h28l-9-24 3-4-3-6 1-8M14 3v0M26 3v0M15 11q5 5 10 0M15 21h10"/></svg>
+        <div>THE BRIDE WILL BE WEARING WHITE,<span>so please avoid wearing white.</span></div>
+      </div>
+    </section>
+
+    <section class="guests rise" style="--i:4">
+      <h3>A LITTLE NOTE FOR OUR GUESTS</h3>
+      <p>This special bridal shower is hosted by</p>
+      <p class="hosts">Eden, Hermela, and Lelti.</p>
+      <p>Join us for a lovely afternoon of brunch, photos, and quality time celebrating Muna as she begins this new beautiful chapter.</p>
+      <div class="gift"><p>If you’d like to bring a small bridal gift for Muna, please feel free to do so. We can also have a little gift opening moment to share in the celebration.</p></div>
+    </section>
+
+    <div class="rise" style="--i:5"><button class="surprise" id="pop" type="button">♡ P.S. It’s a surprise!<br>Please don’t tell Muna! ♡<small>TAP FOR CONFETTI</small></button></div>
+
+    <section id="rsvp" class="rise" style="--i:6" aria-labelledby="rsvp-title">
+      <h3 id="rsvp-title">RSVP</h3>
+      <p class="by">PLEASE REPLY BY NOVEMBER 19</p>
+      <form id="rsvp-form" novalidate>
+        <div class="field">
+          <label for="rsvp-name">Your name</label>
+          <input id="rsvp-name" type="text" autocomplete="name" required>
+        </div>
+        <fieldset class="field">
+          <legend>Will you be there?</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="rsvp-yes" name="attend" value="Yes"><span>Yes, I’ll be there!</span></label>
+            <label class="choice"><input type="radio" id="rsvp-no" name="attend" value="No"><span>Sorry, I can’t make it</span></label>
+          </div>
+        </fieldset>
+        <div class="field" id="rsvp-count-field" hidden>
+          <label for="rsvp-count">How many people are coming, including you?</label>
+          <select id="rsvp-count"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+        </div>
+        <div class="field">
+          <label for="rsvp-note">Note for the hosts (optional)</label>
+          <textarea id="rsvp-note"></textarea>
+        </div>
+        <p id="rsvp-error" role="alert" hidden></p>
+        <button class="btn" id="rsvp-send" type="submit">Send my RSVP</button>
+      </form>
+      <div id="rsvp-done" role="status" hidden><b id="rsvp-done-title"></b><p id="rsvp-done-text"></p></div>
+    </section>
+
+    <div class="actions rise" style="--i:7">
+      <a class="btn" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Muna%27s+Bridal+Shower&amp;dates=20261126T140000/20261126T170000&amp;ctz=America/Chicago&amp;location=Sweet+Paris+Cr%C3%AAperie+%26+Caf%C3%A9,+265+Radio+Dr,+Suite+K,+Woodbury,+MN+55125&amp;details=Spring+Garden+theme.+Please+avoid+wearing+white.+It%27s+a+surprise!">Add to calendar</a>
+      <a class="btn alt" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Sweet+Paris+Cr%C3%AAperie+%26+Caf%C3%A9+265+Radio+Dr+Suite+K+Woodbury+MN+55125">Get directions</a>
+    </div>
+
+    <p class="thanks rise" style="--i:8">Thank you for being a part of Muna’s special day!</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cv = document.getElementById('fx'), cx = cv.getContext('2d');
+  var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  function size() { W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  size(); addEventListener('resize', size);
+  var colors = ['#f7b8c6', '#fbd3dc', '#ffffff', '#b7d3f0', '#fff0c9'];
+  function petal(top) {
+    return { x: Math.random() * W, y: top ? -20 : Math.random() * H, r: 5 + Math.random() * 7, vy: .4 + Math.random() * .8, vx: -.2 + Math.random() * .6,
+      rot: Math.random() * 6.28, vr: (Math.random() - .5) * .04, ph: Math.random() * 6.28, c: colors[(Math.random() * colors.length) | 0], a: .55 + Math.random() * .4 };
+  }
+  var ps = [], n = Math.min(28, Math.round(W / 24));
+  for (var i = 0; i < n; i++) ps.push(petal(false));
+  var bursts = [];
+  function draw() {
+    cx.clearRect(0, 0, W, H);
+    ps.forEach(function (p, i) {
+      p.ph += .02; p.x += p.vx + Math.sin(p.ph) * .6; p.y += p.vy; p.rot += p.vr;
+      if (p.y > H + 20 || p.x > W + 30 || p.x < -30) ps[i] = petal(true);
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot); cx.globalAlpha = p.a; cx.fillStyle = p.c;
+      cx.beginPath(); cx.ellipse(0, 0, p.r, p.r * .55, 0, 0, 6.28); cx.fill(); cx.restore();
+    });
+    for (var j = bursts.length - 1; j >= 0; j--) {
+      var b = bursts[j]; b.vy += .18; b.x += b.vx; b.y += b.vy; b.rot += b.vr; b.life--;
+      if (b.life <= 0) { bursts.splice(j, 1); continue; }
+      cx.save(); cx.translate(b.x, b.y); cx.rotate(b.rot); cx.globalAlpha = Math.min(1, b.life / 30); cx.fillStyle = b.c;
+      if (b.heart) { cx.font = b.s * 2 + 'px serif'; cx.fillText('♥', -b.s, b.s); } else cx.fillRect(-b.s, -b.s / 2, b.s * 2, b.s);
+      cx.restore();
+    }
+    requestAnimationFrame(draw);
+  }
+  if (!reduce) requestAnimationFrame(draw);
+
+  var pal = ['#e8506f', '#5b9bd5', '#f7b8c6', '#c8933e', '#4f9a55', '#b7d3f0'];
+  function burst(x, y) {
+    for (var i = 0; i < 90; i++) {
+      var a = Math.random() * 6.28, sp = 3 + Math.random() * 8;
+      bursts.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 5, rot: Math.random() * 6, vr: (Math.random() - .5) * .3,
+        s: 3 + Math.random() * 5, c: pal[(Math.random() * pal.length) | 0], life: 70 + Math.random() * 60, heart: Math.random() < .3 });
+    }
+  }
+  document.getElementById('pop').addEventListener('click', function (e) {
+    if (reduce) return;
+    burst(e.clientX || W / 2, e.clientY || H / 2);
+    setTimeout(function () { burst(W * .2, H * .6); burst(W * .8, H * .6); }, 180);
+  });
+
+  var env = document.getElementById('envelope'), opened = false, root = document.documentElement;
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
+    env.classList.add('open');
+    setTimeout(function () { env.classList.add('lift'); }, 650);
+    setTimeout(function () { env.classList.add('gone'); root.classList.remove('paused'); burst(W / 2, H * .35); }, 1450);
+    setTimeout(function () { root.classList.remove('sealed'); }, 2050);
+  }
+  env.addEventListener('click', openEnvelope);
+  if (root.classList.contains('sealed')) setTimeout(openEnvelope, 12000);
+
+  function rng(a) {
+    return function () {
+      a = a + 0x6D2B79F5 | 0;
+      var t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function petalShape(c, len, wid) {
+    c.beginPath(); c.moveTo(0, 0);
+    c.bezierCurveTo(wid, -len * .25, wid * .9, -len, 0, -len);
+    c.bezierCurveTo(-wid * .9, -len, -wid, -len * .25, 0, 0);
+    c.closePath();
+  }
+  function floret(c, x, y, r, rot, light, deep, n, eye) {
+    for (var i = 0; i < n; i++) {
+      c.save(); c.translate(x, y); c.rotate(rot + i * 6.283 / n);
+      petalShape(c, r, r * (n > 4 ? .5 : .68));
+      var g = c.createRadialGradient(0, -r * .35, r * .05, 0, -r * .5, r * .8);
+      g.addColorStop(0, light); g.addColorStop(1, deep);
+      c.fillStyle = g; c.fill();
+      c.strokeStyle = 'rgba(70,80,130,.16)'; c.lineWidth = .7; c.stroke();
+      c.restore();
+    }
+    c.beginPath(); c.arc(x, y, r * .14, 0, 6.283); c.fillStyle = eye; c.fill();
+  }
+  function leaf(c, x, y, len, rot) {
+    c.save(); c.translate(x, y); c.rotate(rot);
+    petalShape(c, len, len * .36);
+    var g = c.createLinearGradient(-len * .3, 0, len * .3, -len);
+    g.addColorStop(0, '#9cc884'); g.addColorStop(1, '#4b8a53');
+    c.fillStyle = g; c.fill();
+    c.strokeStyle = 'rgba(255,255,255,.4)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(0, 0); c.lineTo(0, -len * .92);
+    for (var i = 1; i < 5; i++) {
+      var v = -len * i * .19;
+      c.moveTo(0, v); c.lineTo(len * .17, v - len * .1);
+      c.moveTo(0, v); c.lineTo(-len * .17, v - len * .1);
+    }
+    c.stroke(); c.restore();
+  }
+  var kinds = {
+    blue: { under: '#5d84c6', mid: [['#e4effc', '#83ace3'], ['#d9e5fb', '#6f9adb'], ['#ebe6fb', '#9ea0e4'], ['#f2f7fe', '#adcbef']], edge: [['#bcd2f2', '#5f8bd0'], ['#c6c8f2', '#7d82d4']], eye: '#f5e9ad', extra: [['#fffdf2', '#f6e3b0'], ['#fde4ea', '#f3a6ba']] },
+    rose: { under: '#d98aa0', mid: [['#fff0f3', '#f6b3c3'], ['#ffe6ec', '#ef9db2'], ['#fff6ea', '#f7cfa8'], ['#fff5f7', '#f9c6d2']], edge: [['#f9c9d4', '#e283a0'], ['#f7d5c2', '#e8a184']], eye: '#f2d67e', extra: [['#fffdf2', '#f6e3b0'], ['#e4effc', '#9dbfea']] }
+  };
+  function paintBloom(cv) {
+    var c = cv.getContext('2d'), k = kinds[cv.dataset.kind], r = rng(+cv.dataset.seed), S = cv.width, m = S / 2, R = S * .3, i;
+    for (i = 0; i < 9; i++) {
+      var a = i / 9 * 6.283 + r() * .4;
+      leaf(c, m + Math.cos(a) * R * .55, m + Math.sin(a) * R * .55, R * (.95 + r() * .3), a + 1.571);
+    }
+    var u = c.createRadialGradient(m, m, R * .3, m, m, R * 1.02);
+    u.addColorStop(0, k.under); u.addColorStop(.92, k.under); u.addColorStop(1, 'rgba(0,0,0,0)');
+    c.fillStyle = u; c.beginPath(); c.arc(m, m, R * 1.02, 0, 6.283); c.fill();
+    var N = 92, list = [];
+    for (i = 0; i < N; i++) {
+      var d = R * Math.sqrt((i + .5) / N), t = i * 2.39996;
+      list.push({ x: m + Math.cos(t) * d, y: m + Math.sin(t) * d, d: d / R });
+    }
+    list.reverse().forEach(function (f) {
+      var lit = (f.x - m + f.y - m) / (2 * R), p = f.d > .78 || lit > .34 ? k.edge : k.mid, q = p[(r() * p.length) | 0];
+      floret(c, f.x, f.y, R * (.2 - f.d * .04) * (.9 + r() * .25), r() * 6.283, q[0], q[1], 4, k.eye);
+    });
+    for (i = 0; i < 9; i++) {
+      var b = r() * 6.283, e = R * (1.08 + r() * .34), q2 = k.extra[(r() * 2) | 0];
+      floret(c, m + Math.cos(b) * e, m + Math.sin(b) * e, R * (.17 + r() * .09), r() * 6.283, q2[0], q2[1], 5, '#e9b949');
+    }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('canvas.bloom'), paintBloom);
+
+  var FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSfiXgYUq1jjBjLDwWmbEs6wXe5fL4yMQQxoX7zdVJ1kog9tCQ/';
+  var form = document.getElementById('rsvp-form'), err = document.getElementById('rsvp-error'), send = document.getElementById('rsvp-send');
+  var yes = document.getElementById('rsvp-yes'), no = document.getElementById('rsvp-no'), countField = document.getElementById('rsvp-count-field');
+  function syncCount() { countField.hidden = !yes.checked; }
+  yes.addEventListener('change', syncCount); no.addEventListener('change', syncCount);
+  function fail(msg) { err.textContent = msg; err.hidden = false; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('rsvp-name').value.trim();
+    if (!name) { fail('Please enter your name.'); return; }
+    if (!yes.checked && !no.checked) { fail('Please choose whether you can come.'); return; }
+    err.hidden = true; send.disabled = true; send.textContent = 'Sending…';
+    var body = new URLSearchParams();
+    body.set('entry.122416638', name);
+    body.set('entry.568218989', yes.checked ? 'Yes' : 'No');
+    if (yes.checked) body.set('entry.778048179', document.getElementById('rsvp-count').value);
+    body.set('entry.249069159', document.getElementById('rsvp-note').value.trim());
+    fetch(FORM + 'formResponse', { method: 'POST', mode: 'no-cors', body: body }).then(function () {
+      document.getElementById('rsvp-done-title').textContent = yes.checked ? 'You’re on the list, ' + name + '!' : 'Thank you for letting us know, ' + name + '.';
+      document.getElementById('rsvp-done-text').textContent = yes.checked ? 'See you on Thursday, November 26 at 2:00 PM. Remember, it’s a surprise!' : 'We’ll miss you. Please keep the surprise a secret!';
+      form.hidden = true; document.getElementById('rsvp-done').hidden = false;
+      if (yes.checked && !reduce) { var r = document.getElementById('rsvp').getBoundingClientRect(); burst(W / 2, Math.max(80, r.top + 60)); }
+    }).catch(function () {
+      send.disabled = false; send.textContent = 'Send my RSVP';
+      err.innerHTML = 'That didn’t send. Please check your connection and try again, or <a target="_blank" rel="noopener" href="' + FORM + 'viewform">use this form</a>.';
+      err.hidden = false;
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
