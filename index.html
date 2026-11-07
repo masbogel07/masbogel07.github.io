@@ -176,8 +176,7 @@ h2 { margin: -6px 0 10px; font-size: clamp(28px, 8vw, 38px); letter-spacing: .14
 html { scroll-behavior: smooth; }
 .jump-row { display: flex; justify-content: center; }
 #rsvp { scroll-margin-top: 16px; background: #fffaf4; border: 1px solid #efd3bd; border-radius: 22px; padding: 22px 18px; box-shadow: 0 14px 26px -20px rgba(60,40,20,.6); }
-#rsvp h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 52px; line-height: 1.1; color: var(--rose); }
-.by { margin: 2px 0 18px; font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--blue-deep); }
+#rsvp h3 { margin: 0 0 14px; text-align: center; font-family: var(--display); font-weight: 400; font-size: 52px; line-height: 1.1; color: var(--rose); }
 #rsvp-form { display: flex; flex-direction: column; gap: 16px; text-align: left; }
 .field { display: flex; flex-direction: column; gap: 6px; border: 0; margin: 0; padding: 0; min-width: 0; }
 .field > label, .field > legend { padding: 0; font-weight: 700; font-size: 17px; color: var(--navy); }
@@ -310,7 +309,7 @@ if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matche
       </div>
     </section>
 
-    <div class="jump-row rise" style="--i:2"><a class="btn" href="#rsvp">RSVP by November 19</a></div>
+    <div class="jump-row rise" style="--i:2"><a class="btn" href="#rsvp">Reserve</a></div>
 
     <section class="theme rise" style="--i:3">
       <p class="label">THEME</p>
@@ -334,7 +333,6 @@ if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matche
 
     <section id="rsvp" class="rise" style="--i:6" aria-labelledby="rsvp-title">
       <h3 id="rsvp-title">RSVP</h3>
-      <p class="by">PLEASE REPLY BY NOVEMBER 19</p>
       <form id="rsvp-form" novalidate>
         <div class="field">
           <label for="rsvp-name">Your name</label>
